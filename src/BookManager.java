@@ -22,7 +22,7 @@ public class BookManager {
         books.add(new Book("B010", "The Hunger Games", "Suzanne Collins", 17.99, "Science Fiction"));
     }
 
-    public List<Book> getAllBooks() { 
+    public List<Book> getAllBooks() {
         return books;
     }
 
