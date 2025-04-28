@@ -3,15 +3,13 @@ public class Book {
     private String title;
     private String author;
     private double price;
-    private int quantity;
     private String category;
 
-    public Book(String id, String title, String author, double price, int quantity, String category) {
+    public Book(String id, String title, String author, double price, String category) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.price = price;
-        this.quantity = quantity;
         this.category = category;
     }
 
@@ -32,10 +30,6 @@ public class Book {
         return price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -53,10 +47,6 @@ public class Book {
         this.price = price;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public void setCategory(String category) {
         this.category = category;
     }
@@ -67,18 +57,7 @@ public class Book {
         System.out.println("Title: " + title);
         System.out.println("Author: " + author);
         System.out.println("Price: $" + price);
-        System.out.println("Quantity: " + quantity);
         System.out.println("Category: " + category);
         System.out.println("------------------------");
-    }
-
-    // Method to check if book is in stock
-    public boolean isInStock() {
-        return quantity > 0;
-    }
-
-    // Method to update quantity after purchase
-    public void updateQuantity(int amount) {
-        this.quantity += amount;
     }
 }
