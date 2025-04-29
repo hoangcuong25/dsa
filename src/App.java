@@ -62,7 +62,7 @@ public class App {
                     }
                     break;
                 case 3:
-                    System.out.println("Sort books");
+                    sortBooksMenu();
                     break;
                 case 4:
                     System.out.println("Add to cart");
@@ -78,6 +78,34 @@ public class App {
                 System.out.println("\nPress Enter to continue...");
                 scanner.nextLine();
             }
+        }
+    }
+
+    private static void sortBooksMenu() {
+        clearScreen();
+        System.out.println("\n===== SORT BOOKS =====");
+        System.out.println("1. Sort by price (Ascending)");
+        System.out.println("2. Sort by price (Descending)");
+        System.out.println("0. Back to previous menu");
+        System.out.println("=====================");
+        System.out.print("Enter your choice: ");
+
+        int choice = getChoice();
+        switch (choice) {
+            case 1:
+                bookManager.sortBooksByPrice();
+                System.out.println("\nBooks sorted by price (Ascending):");
+                bookManager.displayAllBooks();
+                break;
+            case 2:
+                bookManager.sortBooksByPriceDescending();
+                System.out.println("\nBooks sorted by price (Descending):");
+                bookManager.displayAllBooks();
+                break;
+            case 0:
+                return;
+            default:
+                System.out.println("Invalid choice. Please try again.");
         }
     }
 
