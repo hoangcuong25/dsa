@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.List;
 
 public class App {
     private static Scanner scanner = new Scanner(System.in);
@@ -47,7 +48,18 @@ public class App {
                     bookManager.displayAllBooks();
                     break;
                 case 2:
-                    System.out.println("Search books");
+                    System.out.println("Search books by title or author:");
+                    String keyword = scanner.nextLine();
+                    List<Book> searchResults = bookManager.searchBooks(keyword);
+                    if (searchResults.isEmpty()) {
+                        System.out.println("No books found.");
+                    } else {
+                        System.out.println("--------------------------------");
+                        System.out.println("Search results:");
+                        for (Book book : searchResults) {
+                            book.displayInfo();
+                        }
+                    }
                     break;
                 case 3:
                     System.out.println("Sort books");
@@ -57,7 +69,7 @@ public class App {
                     break;
                 case 0:
                     backToMain = true;
-                    continue; 
+                    continue;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }

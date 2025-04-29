@@ -33,19 +33,11 @@ public class BookManager {
         }
     }
 
-    public Book findBookById(String id) {
-        for (Book book : books) {
-            if (book.getId().equals(id)) {
-                return book;
-            }
-        }
-        return null;
-    }
-
-    public List<Book> findBooksByCategory(String category) {
+    public List<Book> searchBooks(String keyword) {
         List<Book> result = new ArrayList<>();
         for (Book book : books) {
-            if (book.getCategory().equalsIgnoreCase(category)) {
+            if (book.getTitle().toLowerCase().contains(keyword.toLowerCase()) ||
+                    book.getAuthor().toLowerCase().contains(keyword.toLowerCase())) {
                 result.add(book);
             }
         }
