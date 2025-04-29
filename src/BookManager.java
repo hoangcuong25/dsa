@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Comparator;
 
 public class BookManager {
     private List<Book> books;
@@ -75,5 +74,14 @@ public class BookManager {
             }
         }
         return books;
+    }
+
+    public Book findBookById(String id) {
+        for (Book book : books) {
+            if (book.getId().equalsIgnoreCase(id)) {
+                return book;
+            }
+        }
+        return null;
     }
 }

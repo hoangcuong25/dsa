@@ -21,8 +21,11 @@ public class App {
                     clearScreen();
                     System.out.println("Show all orders");
                     // Add order functionality here
+                    System.out.println("\nPress Enter to continue...");
+                    scanner.nextLine();
                     break;
                 case 0:
+                    clearScreen();
                     System.out.println("Exiting program...");
                     running = false;
                     break;
@@ -44,10 +47,12 @@ public class App {
 
             switch (choice) {
                 case 1:
+                    clearScreen();
                     System.out.println("\n===== LIST OF BOOKS =====");
                     bookManager.displayAllBooks();
                     break;
                 case 2:
+                    clearScreen();
                     System.out.println("Search books by title or author:");
                     String keyword = scanner.nextLine();
                     List<Book> searchResults = bookManager.searchBooks(keyword);
@@ -65,7 +70,7 @@ public class App {
                     sortBooksMenu();
                     break;
                 case 4:
-                    System.out.println("Add to cart");
+                    addToCartMenu();
                     break;
                 case 0:
                     backToMain = true;
@@ -93,11 +98,13 @@ public class App {
         int choice = getChoice();
         switch (choice) {
             case 1:
+                clearScreen();
                 bookManager.sortBooksByPrice();
                 System.out.println("\nBooks sorted by price (Ascending):");
                 bookManager.displayAllBooks();
                 break;
             case 2:
+                clearScreen();
                 bookManager.sortBooksByPriceDescending();
                 System.out.println("\nBooks sorted by price (Descending):");
                 bookManager.displayAllBooks();
@@ -129,6 +136,31 @@ public class App {
         System.out.print("Enter your choice: ");
     }
 
+    private static void addToCartMenu() {
+        clearScreen();
+        System.out.println("\n===== ADD TO CART =====");
+        System.out.println("List of available books:");
+        bookManager.displayAllBooks();
+        System.out.println("\nEnter book ID to add to cart (or '0' to cancel):");
+        String bookId = scanner.nextLine();
+
+        if (bookId.equals("0")) {
+            return;
+        }
+
+        Book selectedBook = bookManager.findBookById(bookId);
+        if (selectedBook != null) {
+            System.out.println("\nBook added to cart:");
+            selectedBook.displayInfo();
+            // TODO: Add the book to cart
+        } else {
+            System.out.println("\nBook not found with ID: " + bookId);
+        }
+
+        System.out.println("\nPress Enter to continue...");
+        scanner.nextLine();
+    }
+
     private static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -143,4 +175,5 @@ public class App {
             }
         }
     }
+
 }
