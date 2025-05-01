@@ -129,9 +129,6 @@ public class App {
                 case 2:
                     searchOrder();
                     break;
-                case 3:
-                    processNextOrder();
-                    break;
                 case 0:
                     backToMain = true;
                     continue;
@@ -150,7 +147,6 @@ public class App {
         System.out.println("\n===== ORDER MANAGEMENT =====");
         System.out.println("1. View Order Queue");
         System.out.println("2. Search Orders");
-        System.out.println("3. Process Next Order");
         System.out.println("0. Back to main menu");
         System.out.println("=====================");
         System.out.print("Enter your choice: ");
@@ -201,9 +197,6 @@ public class App {
         }
     }
 
-    private static void processNextOrder() {
-        orderManager.processNextOrder();
-    }
 
     private static void addToCartMenu() {
         clearScreen();

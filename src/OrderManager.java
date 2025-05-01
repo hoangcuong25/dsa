@@ -29,19 +29,6 @@ public class OrderManager {
         }
     }
 
-    public void processNextOrder() {
-        order order = orderQueue.poll();
-        if (order != null) {
-            // Sort books by title
-            order.sortBooksByTitle();
-            order.setStatus("Processing");
-            completedOrders.add(order);
-            System.out.println("Order " + order.getOrderId() + " is being processed.");
-        } else {
-            System.out.println("No orders in queue.");
-        }
-    }
-
     public void displayAllOrders() {
         if (orderQueue.isEmpty() && completedOrders.isEmpty()) {
             System.out.println("No orders found.");
@@ -92,16 +79,6 @@ public class OrderManager {
             }
         }
         return results;
-    }
-
-    public void updateOrderStatus(String orderId, String newStatus) {
-        order order = findOrderById(orderId);
-        if (order != null) {
-            order.setStatus(newStatus);
-            System.out.println("Order status updated successfully!");
-        } else {
-            System.out.println("Order not found with ID: " + orderId);
-        }
     }
 
     public void displayOrderQueue() {
