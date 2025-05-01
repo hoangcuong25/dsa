@@ -4,12 +4,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class OrderManager {
     private Queue<order> orderQueue;
     private List<order> completedOrders;
-    private BookFinder bookFinder;
+    private BookManager bookManager;
 
-    public OrderManager(BookFinder bookFinder) {
+    public OrderManager(BookManager bookManager) {
         this.orderQueue = new LinkedBlockingQueue<>();
         this.completedOrders = new ArrayList<>();
-        this.bookFinder = bookFinder;
+        this.bookManager = bookManager;
     }
 
     public order createOrder(String customerName, String shippingAddress) {
@@ -20,7 +20,7 @@ public class OrderManager {
     }
 
     public void addBookToOrder(order order, String bookId, int quantity) {
-        Book book = bookFinder.findBook(bookId);
+        Book book = bookManager.findBookById(bookId);
         if (book != null) {
             order.addBook(book, quantity);
             System.out.println("Book added to order successfully!");

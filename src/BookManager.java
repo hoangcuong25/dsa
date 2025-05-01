@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookManager implements BookFinder {
+public class BookManager {
     private List<Book> books;
 
     public BookManager() {
@@ -83,10 +83,5 @@ public class BookManager implements BookFinder {
             }
         }
         return null;
-    }
-
-    @Override
-    public Book findBook(String bookId) {
-        return findBookById(bookId);
     }
 }
