@@ -4,6 +4,8 @@ import java.util.List;
 public class App {
     private static Scanner scanner = new Scanner(System.in);
     private static BookManager bookManager = new BookManager();
+    private static OrderManager orderManager = new OrderManager(bookManager);
+    private static order currentOrder = null;
 
     public static void main(String[] args) throws Exception {
         boolean running = true;
@@ -20,7 +22,7 @@ public class App {
                 case 2:
                     clearScreen();
                     System.out.println("Show all orders");
-                    // Add order functionality here
+                    orderManager.displayAllOrders();
                     System.out.println("\nPress Enter to continue...");
                     scanner.nextLine();
                     break;
@@ -150,15 +152,50 @@ public class App {
 
         Book selectedBook = bookManager.findBookById(bookId);
         if (selectedBook != null) {
-            System.out.println("\nBook added to cart:");
-            selectedBook.displayInfo();
-            // TODO: Add the book to cart
+            if (currentOrder == null) {
+                currentOrder = orderManager.createOrder();
+            }
+            orderManager.addBookToOrder(currentOrder, bookId);
         } else {
             System.out.println("\nBook not found with ID: " + bookId);
         }
 
-        System.out.println("\nPress Enter to continue...");
-        scanner.nextLine();
+        System.out.println("\n1. Continue shopping");
+        System.out.println("2. View cart");
+        System.out.println("3. Place order");
+        System.out.println("0. Cancel");
+        System.out.print("Enter your choice: ");
+
+        int choice = getChoice();
+        switch (choice) {
+            case 1:
+                addToCartMenu();
+                break;
+            case 2:
+                if (currentOrder != null) {
+                    currentOrder.displayOrder();
+                    System.out.println("\nPress Enter to continue...");
+                    scanner.nextLine();
+                }
+                break;
+            case 3:
+                if (currentOrder != null) {
+                    currentOrder.setStatus("Completed");
+                    System.out.println("\nOrder placed successfully!");
+                    currentOrder = null;
+                    System.out.println("\nPress Enter to continue...");
+                    scanner.nextLine();
+                }
+                break;
+            case 0:
+                if (currentOrder != null) {
+                    currentOrder = null;
+                    System.out.println("\nOrder cancelled.");
+                }
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
     }
 
     private static void clearScreen() {
